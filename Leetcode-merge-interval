@@ -1,0 +1,26 @@
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        // Step - 1 Sort the Interval
+        Arrays.sort(intervals, (a,b)->a[0]-b[0]);
+        // Step - 2 Store the final result
+        List<int[]> result = new ArrayList<>(); // all slot free
+        // Step - 3 Traverse the intervals one by one
+        for(int [] interval : intervals){
+            // this interval is not overlapping so just add it
+            // result.get(result.size()-1) - get the last slot e.g  // [9,11]
+            // [0] starttime // [1] - end time
+           // fill result [[9,11] , [12,2]]
+            
+            if(result.size()==0 || result.get(result.size()-1)[1]<interval[0]){
+                result.add(interval);
+            }
+            else{
+                result.get(result.size()-1)[1] = Math.max(result.get(result.size()-1)[1], interval[1]); 
+                // if overlap so merge it
+            }
+        }
+        return result.toArray(new int[result.size()][]); // convert list into 2-d Array
+
+
+    }
+}
